@@ -6,58 +6,137 @@
 
 <br>
 
-# Nome do projeto
+# Projeto Integrado - FPF Enterprises  
+**Grupo:** FPF Enterprises  
+**Integrantes:**  
+- Pedro Henrique Zani - PEDROHZANI@GMAIL.COM  
+- Flavia Nunes Bocchino - flahbocchino@gmail.com  
+- Felipe Silva de Menezes - menezes.felipesilva@gmail.com  
 
-## Nome do grupo
+---
 
-## 👨‍🎓 Integrantes: 
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do integrante 1</a>
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do integrante 2</a>
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do integrante 3</a> 
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do integrante 4</a> 
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do integrante 5</a>
+# 🧠 Proposta Técnica – FPF Enterprises  
+**Fase 1 – Planejamento e Estruturação Técnica**  
+**Desafio:** Coleta, Armazenamento e Processamento Local de Dados Sensoriais para Predição de Falhas  
 
-## 👩‍🏫 Professores:
-### Tutor(a) 
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do Tutor</a>
-### Coordenador(a)
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do Coordenador</a>
+---
+
+## 1. 🎯 Justificativa do Problema  
+Em ambientes produtivos como o agronegócio e a indústria, falhas inesperadas em máquinas e sistemas geram atrasos, desperdícios e prejuízos. A ausência de um sistema inteligente que antecipe essas falhas com base em dados operacionais limita a eficiência e impede a adoção de estratégias preditivas.
+
+A **FPF Enterprises** propõe o desenvolvimento de uma arquitetura tecnológica baseada na coleta de **dados sensoriais reais**, com **armazenamento em nuvem** e **processamento local** usando Machine Learning. O objetivo é antecipar falhas, permitindo a tomada de decisões corretivas com antecedência e confiabilidade.
+
+---
+
+## 2. 💡 Descrição da Solução Proposta  
+A solução consiste em um sistema que:
+- Coleta dados sensoriais (ex.: vibração, temperatura, umidade, velocidade) com sensores físicos (ESP32);
+- Armazena esses dados em um **banco de dados PostgreSQL** hospedado em nuvem (AWS RDS);
+- Processa localmente os dados no computador do operador usando Python;
+- Treina modelos preditivos com TensorFlow para antecipar falhas de componentes ou sistemas operacionais.
+
+### 🌟 Benefícios Esperados:
+- **Redução de tempo de inatividade:** previsões precisas permitem manutenção antes que a falha aconteça;
+- **Economia de recursos:** intervenções planejadas evitam desgaste desnecessário de componentes;
+- **Aumento da confiabilidade operacional:** monitoramento constante e preditivo melhora a tomada de decisão.
+
+---
+
+## 3. 🛠️ Tecnologias Utilizadas
+
+| Categoria                  | Ferramenta                     | Justificativa                                      |
+|---------------------------|--------------------------------|-----------------------------------------------------|
+| Linguagem de Programação   | Python                          | Sintaxe acessível, ideal para ciência de dados e IA  |
+| Bibliotecas de IA          | TensorFlow, Keras, Scikit-learn  | Frameworks poderosos e amplamente usados em predição |
+| Manipulação de Dados       | Pandas, NumPy                    | Manipulação rápida e eficiente de dados tabulares    |
+| Banco de Dados             | PostgreSQL (AWS RDS)             | Armazenamento relacional seguro, com backup automático|
+| Sensores                   | ESP32                           | Leitura de variáveis em tempo real com conexão Wi-Fi |
+| Nuvem                      | Amazon Web Services (RDS)        | Alta disponibilidade, escalabilidade e integração    |
+| IDE / Ambiente Local       | Jupyter Notebook                 | Análise interativa e visualização de dados           |
+
+---
+
+## 4. 📐 Esboço da Arquitetura da Solução
+
+1. **Coleta de Dados:**  
+   - Sensores ESP32 capturam variáveis críticas (temperatura, vibração).  
+   - Cada leitura contém um **timestamp**, **ID do sensor** e **variáveis coletadas**.  
+   - Dados enviados via Wi-Fi para o banco na nuvem.  
+
+2. **Armazenamento na Nuvem:**  
+   - Banco de dados PostgreSQL (AWS RDS) recebe e organiza os dados.  
+   - Estrutura relacional garante rastreamento por data/hora e dispositivo.  
+
+3. **Processamento Local:**  
+   - Aplicação em Python conecta ao banco e coleta os dados.  
+   - Modelos preditivos com TensorFlow identificam falhas potenciais.  
+
+4. **Predição de Falhas:**  
+   - Modelos classificam o estado dos equipamentos: **"Normal"** ou **"Risco de Falha"**.  
+
+---
+
+## 5. 🔎 Estratégia de Coleta de Dados  
+- **Captura:** Sensores ESP32 coletam dados a cada 5 segundos.  
+- **Envio:** Dados enviados automaticamente para o banco na nuvem via conexões seguras (SSL).  
+- **Rastreabilidade:** Cada sensor possui um ID único para garantir a identificação.  
+
+### 🔒 Segurança dos Dados:
+- Conexão Criptografada (SSL) entre sensores e banco.  
+- Autenticação segura com senha forte e controle de IP no AWS RDS.  
+- Monitoramento contínuo para detectar acessos irregulares.  
+
+---
+
+## 6. 📋 Plano de Desenvolvimento (3 Membros)
+
+| Membro   | Função                     | Tarefas                                                                  |
+|---------|-----------------------------|--------------------------------------------------------------------------|
+| Pedro   | Infraestrutura de Dados      | Configuração AWS RDS, integração ESP32, testes de conectividade            |
+| Flavia  | Análise de Dados e IA        | Modelagem preditiva com TensorFlow, notebooks de análise                   |
+| Felipe  | Documentação e Organização   | Estruturação do GitHub, documentação técnica, controle de versões          |
+
+---
+
+## 7. 📁 Estrutura Inicial do Repositório
+fpf-enterprises-ml-solution/
+├── /docs/ # Documentação técnica e diagramas
+├── /data/ # Scripts para coleta de dados
+├── /model/ # Notebooks de análise preditiva
+├── /cloud/ # Scripts de configuração da nuvem (AWS)
+├── /logs/ # Arquivos de log para monitoramento
+├── requirements.txt # Dependências do Python
+└── README.md # Documento principal do projeto
+
+---
+
+## 8. 💻 Como Executar o Código
+1. **Clonar o Repositório:**
+   ```bash
+   git clone https://github.com/seu-usuario/fpf-enterprises-predictive-maintenance.git
+   cd fpf-enterprises-predictive-maintenance
+
+---
+
+## 9. 🗓️ Histórico de Lançamento
+### Versão 1.0.0 - 2025-05-08
+- Implementação inicial: coleta, armazenamento e processamento de dados sensoriais.  
+- Modelagem preditiva com TensorFlow.  
+- Documentação e estrutura de pastas definidas.  
+
+### Versão 1.1.0 - (Prevista)
+- Dashboards interativos com Streamlit.  
+- Automação com AWS Lambda para atualização de modelos.  
+- Integração com novos tipos de sensores (ex: sensores de pressão).  
+
+---
+
+## ✅ Como Atualizar o Projeto
+1. **Puxar as atualizações do repositório:**  
+   ```bash
+   git pull origin main
 
 
-## 📜 Descrição
-
-*Descreva seu projeto com base no texto do PBL (até 600 palavras)*
-
-
-## 📁 Estrutura de pastas
-
-Dentre os arquivos e pastas presentes na raiz do projeto, definem-se:
-
-- <b>assets</b>: aqui estão os arquivos relacionados a elementos não-estruturados deste repositório, como imagens.
-
-- <b>document</b>: aqui estão todos os documentos do projeto que as atividades poderão pedir. Na subpasta "other", adicione documentos complementares e menos importantes.
-
-- <b>src</b>: Todo o código fonte criado para o desenvolvimento do projeto ao longo das 7 fases.
-
-- <b>README.md</b>: arquivo que serve como guia e explicação geral sobre o projeto (o mesmo que você está lendo agora).
-
-## 🔧 Como executar o código
-
-*Acrescentar as informações necessárias sobre pré-requisitos (IDEs, serviços, bibliotecas etc.) e instalação básica do projeto, descrevendo eventuais versões utilizadas. Colocar um passo a passo de como o leitor pode baixar o seu código e executá-lo a partir de sua máquina ou seu repositório. Considere a explicação organizada em fase.*
-
-
-## 🗃 Histórico de lançamentos
-
-* 0.5.0 - XX/XX/2024
-    * 
-* 0.4.0 - XX/XX/2024
-    * 
-* 0.3.0 - XX/XX/2024
-    * 
-* 0.2.0 - XX/XX/2024
-    * 
-* 0.1.0 - XX/XX/2024
-    *
 
 ## 📋 Licença
 
